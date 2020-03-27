@@ -1,0 +1,91 @@
+// For those who want the bleeding edge
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven { url = 'https://repo.spongepowered.org/maven' }
+        maven { url = 'https://plugins.gradle.org/m2' }  
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
+    }
+}
+
+plugins {
+    id 'com.matthewprenger.cursegradle' version '1.0.10'
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+minecraft {
+    version = "1.12.2-14.23.5.2847"
+    runDir = "run"
+    mappings = "snapshot_20171003"
+    makeObfSourceJar = false
+}
+
+repositories {
+    // mavenCentral()
+    maven { url = "https://oss.sonatype.org/content/repositories/public/" }
+    maven { url = 'https://repo.spongepowered.org/maven' }
+    // Note: sponge repository needs to be the second one because flow-noise is both in sponge and sonatype repository
+    // but sponge has older one, and we need the newer one from sonatype
+    // currently gradle seems to resolve dependencies from repositories in the order they are defined here 
+    maven { url = "https://minecraft.curseforge.com/api/maven/" }
+    maven { url = "https://repo.elytradev.com" } // jankson snapshot 
+}
+
+dependencies {
+    testCompile "junit:junit:4.11"
+
+    compile("org.spongepowered:mixin:0.8.1-SNAPSHOT")
+    {
+        transitive = false
+    }
+
+    deobfCompile("io.github.opencubicchunks:cubicchunks-api:1.12.2-0.0-SNAPSHOT")
+    {
+        transitive = false
+    }
+}
+
+
+processResources
+{
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+// apply from: '../masterbuild.gradle'
+
+/*
+curseforge {
+    apiKey = project.curseForgeApiKey
+    project {
+        id = '227873'
+        releaseType = 'release'
+        addGameVersion version
+        mainArtifact(file('build/libs/Ruins-' + version + '.jar')) {
+            displayName = 'Ruins (Structure Spawning System)'
+        }
+    }
+}
+*/
