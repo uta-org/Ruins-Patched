@@ -5,6 +5,21 @@ This is a mod for minecraft that adds randomly ruins.
 
 # NOW WORKING UNDER CC/CWG/T121!!!
 
+## Terms
+
+!(...)[imgs/atomicstryker terms.png]
+
+**Repository:** 
+https://github.com/AtomicStryker/atomicstrykers-minecraft-mods/tree/1.12.2/Ruins
+
+**Curseforge:** 
+https://www.curseforge.com/minecraft/mc-mods/ruins-structure-spawning-system
+
+**Minecraft Forum:** 
+https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/1282339-1-15-1-ruins-structure-spawning-system
+
+**Website:** http://atomicstryker.net/
+
 ## Setup instructions
 
 Plase use `./gradlew setupDecompWorkspace --refresh-dependencies idea`
