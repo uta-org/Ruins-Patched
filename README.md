@@ -7,7 +7,7 @@ This is a mod for minecraft that adds randomly ruins.
 
 ## Terms
 
-![...](imgs/atomicstryker terms.png)
+![...](https://raw.githubusercontent.com/uta-org/Ruins-Patched/master/imgs/atomicstryker%20terms.PNG)
 
 **Repository:** 
 https://github.com/AtomicStryker/atomicstrykers-minecraft-mods/tree/1.12.2/Ruins
